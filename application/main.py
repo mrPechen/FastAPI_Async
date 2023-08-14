@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 
-from application.routers import dish_routers, menu_routers, submenu_routers
 from application.db_app import models
 from application.db_app.database import engine
+from application.routers import dish_routers, menu_routers, submenu_routers
 
 app = FastAPI()
 
