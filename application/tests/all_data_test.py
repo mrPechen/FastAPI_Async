@@ -1,7 +1,6 @@
 from typing import Any
 
 import pytest
-
 from httpx import AsyncClient
 
 from application.main import app
