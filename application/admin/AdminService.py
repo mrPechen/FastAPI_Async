@@ -1,8 +1,8 @@
 from typing import Any
 
-from application.db_app.database import SessionLocal
-
 from sqlalchemy import select
+
+from application.db_app.database import SessionLocal
 
 
 class EntityMerger:
