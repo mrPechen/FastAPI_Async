@@ -1,6 +1,6 @@
 from typing import Any
 
-from fastapi import Depends, BackgroundTasks
+from fastapi import BackgroundTasks, Depends
 
 from application.cache.cache import RedisRepository
 from application.db_app import schemas
