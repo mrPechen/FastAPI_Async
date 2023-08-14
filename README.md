@@ -48,6 +48,3 @@ Task from the YLab company. FastAPI + SQLalchemy + PostgreSQL + Pytest + Docker 
     5. Для работы через google_sheets остановить контейнеры, перейти в "application/admin/tasks/функция 'run'", в переменной "file" изменить аргумент 'application/admin/Menu.xlsx' класса XlsxDataSource() на переменную "url", в которой уже прописан адрес google документа.
     6. Запустить команду "docker compose -f docker-compose.yaml up --build" из корня проекта.
     7. Для изменения/добавления/удаления данных перейти по ссылке "https://docs.google.com/spreadsheets/d/1XPapODkrVhDUzbiR9vSmH7_-cZvjn3HcclbMGlEkbp4/edit#gid=0". Примечания такие же, как и в пункте №4.
-    '''
-
-
