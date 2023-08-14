@@ -107,27 +107,3 @@ class DishParseSchema(BaseModel):
     price: str
     menu_id: int
     submenu_id: int
-
-
-class AllDishes(DishBase):
-    menu_id: Optional[int]
-    submenu_id: int
-    title: str
-    description: str
-    price: str
-    model_config = ConfigDict(from_attributes=True)
-
-
-class AllSubmenu(SubmenuBase):
-    menu_id: int | None = None
-    title: str
-    description: str
-    dish: list[AllDishes]
-    model_config = ConfigDict(from_attributes=True)
-
-
-class AllMenu(MenuBase):
-    title: str
-    description: str
-    submenu_rel: list
-    model_config = ConfigDict(from_attributes=True)
