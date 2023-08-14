@@ -1,6 +1,10 @@
 import pandas as pd
 
-from application.db_app.schemas import MenuParseSchema, SubmenuParseSchema, DishParseSchema
+from application.db_app.schemas import (
+    DishParseSchema,
+    MenuParseSchema,
+    SubmenuParseSchema,
+)
 
 
 class XlsxDataSource:
