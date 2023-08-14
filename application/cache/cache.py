@@ -20,7 +20,7 @@ class RedisRepository:
         if if_list is False:
             data = jsonable_encoder(value._mapping)
         serialized_data = json.dumps(data)
-        return await self.redis.set(name=name, value=serialized_data, ex=120)
+        return await self.redis.set(name=name, value=serialized_data, ex=15)
 
     async def get_cache(self, name: str) -> Any:
         cache = await self.redis.get(name)
