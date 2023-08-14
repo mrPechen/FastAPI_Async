@@ -1,0 +1,81 @@
+version: '3'
+
+services:
+  db:
+    container_name: peche_postgres
+    image: postgres:latest
+    env_file:
+      - ./.env
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - ylab_project
+
+
+  redis:
+    container_name: peche_redis
+    image: redis:latest
+    env_file:
+      - ./.env
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - ylab_project
+
+  rabbitmq:
+    container_name: peche_rabbitmq
+    image: rabbitmq:latest
+    env_file:
+      - ./.env
+    restart: always
+    ports:
+      - "5672:5672"
+    healthcheck:
+      test: [ "CMD", "rabbitmqctl", "status" ]
+      interval: 5s
+      timeout: 10s
+      retries: 200
+    networks:
+      - ylab_project
+
+  celery_worker:
+    container_name: peche_celery
+    build:
+      context: .
+    image: celery:latest
+    env_file:
+      - ./.env
+    command: celery -A application.admin.tasks worker --loglevel=INFO -B
+    restart: always
+    networks:
+      - ylab_project
+    volumes:
+      - ./application/admin/Menu.xlsx:/home/usr/app/application/admin/Menu.xlsx
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      fastapi:
+        condition: service_started
+
+  fastapi:
+    container_name: peche_fastapi
+    build:
+      context: .
+    command: uvicorn application.main:app --host 0.0.0.0 --reload
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+    networks:
+      - ylab_project
+    restart: always
+    depends_on:
+      - db
+      - redis
+
+
+networks:
+  ylab_project:
+    driver: bridge

@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  db:
+    container_name: pytest_peche_postgres
+    image: postgres:latest
+    env_file:
+      - ./.env
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - ylab_project_pytest
+
+
+  redis:
+    container_name: peche_redis_pytest
+    image: redis:latest
+    env_file:
+      - ./.env
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - ylab_project_pytest
+
+
+  pytest:
+    container_name: pytest_peche
+    build:
+      context: .
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+      - redis
+    networks:
+      - ylab_project_pytest
+    command: sh -c "pytest -v"
+
+
+networks:
+  ylab_project_pytest:
+    driver: bridge

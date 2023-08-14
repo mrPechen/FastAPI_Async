@@ -1,0 +1,13 @@
+fastapi[all]
+psycopg2-binary
+sqlalchemy
+pytest
+pytest-order
+pre-commit
+redis
+celery
+httpx
+asyncpg
+pandas
+asgiref
+openpyxl
