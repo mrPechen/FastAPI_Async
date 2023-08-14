@@ -1,7 +1,6 @@
-from typing import Any, Sequence, Union
+from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy import Row, RowMapping
 
 from application.db_app import schemas
 from application.services.menu_service import MenuService
