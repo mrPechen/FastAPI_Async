@@ -3,7 +3,10 @@ Task from the YLab company. FastAPI + SQLalchemy + PostgreSQL + Pytest + Docker 
 
 Реализованные задачи под *:  
 -Вывод количества подменю и блюд для Меню через один (сложный) ORM запрос. Где посмотреть: "application/repositories/menu_repository/функция get_meny()".  
+
 -Тестовый сценарий «Проверка кол-ва блюд и подменю в меню» из Postman с помощью pytest. Где посмотреть: "application/tests/count_submenus_and_dishes_test.py".
+
+-Обновление меню из google sheets раз в 15 сек. Где посмотреть: "application/admin/DataSource/21 строчка" и "application/admin/tasks/11 и 12 строчка".
 
 Для хранения переменных во время запуска Pytest использовал встроенное кэширование.
 Тест подсчета подменю и блюд реализован в файле "application/tests/count_submenus_and_dishes_test.py". Он запускается вместе со всеми тестами.
@@ -33,12 +36,14 @@ Task from the YLab company. FastAPI + SQLalchemy + PostgreSQL + Pytest + Docker 
     2. Запустить команду "docker compose -f docker-compose-test.yaml up --build" из корня проекта.
 
 
-    Запуск проекта с Celery + RabbitMQ + Админка через Excel:
+    Запуск проекта с Celery + RabbitMQ + Админка через Excel/ Админка через google sheets:
 
     1. Остановить предыдущие контейнеры, если они активны.
     2. Запустить команду "docker compose -f docker-compose.yaml up --build" из корня проекта.
     3. Файл "Menu.xlsx" находится в "application/admin". При запуске докера Celery самостоятельно запускает переодическую задачу, которая обновляет базу данных из этого файла.
     4. Для изменения/добавления/удаления данных открыть файл "Menu.xlsx" в "application/admin" в склонированном проекте, внести изменения и сохранить. Важно: 1) id Меню, подменю и блюд были уникальны. 2) Логика расположения строк (id, название, описание и тд.) должна быть идентичной изначальному файлу.
-    5. Обновления появятся через 15 секунд.
+    5. Для работы через google_sheets остановить контейнеры, перейти в "application/admin/tasks/функция 'run'", в переменной "file" изменить аргумент 'application/admin/Menu.xlsx' класса XlsxDataSource() на переменную "url", в которой уже прописан адрес google документа.
+    6. Запустить команду "docker compose -f docker-compose.yaml up --build" из корня проекта.
+    7. Для изменения/добавления/удаления данных перейти по ссылке "https://docs.google.com/spreadsheets/d/1XPapODkrVhDUzbiR9vSmH7_-cZvjn3HcclbMGlEkbp4/edit#gid=0". Примечания такие же, как и в пункте №4.
 
 
