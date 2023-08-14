@@ -1,6 +1,7 @@
 from typing import Any
 
 from application.db_app.database import SessionLocal
+
 from sqlalchemy import select
 
 
