@@ -2,13 +2,12 @@ import json
 from typing import Any, Sequence
 
 from fastapi import Depends
-from sqlalchemy import Row, RowMapping
 from fastapi.background import BackgroundTasks
-
-from application.repositories.all_data_repository import AllDataRepository
 from fastapi.encoders import jsonable_encoder
+from sqlalchemy import Row, RowMapping
 
 from application.cache.cache import RedisRepository
+from application.repositories.all_data_repository import AllDataRepository
 
 
 class AllDataService:
@@ -17,7 +16,7 @@ class AllDataService:
         self.redis = RedisRepository()
         self.background_task = BackgroundTasks()
 
-    async def set_cache(self, value: any) -> Any:
+    async def set_cache(self, value: Any) -> Any:
         data = jsonable_encoder(value)
         serialized_data = json.dumps(data)
         return await self.redis.redis.set(name='all_data', value=serialized_data, ex=120)
