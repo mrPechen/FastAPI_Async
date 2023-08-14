@@ -6,7 +6,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Session, joinedload
 
 from application.db_app.database import connect_db
-
 from application.db_app.models import Menu, Submenu, Dish
 
 
