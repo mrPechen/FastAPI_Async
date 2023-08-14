@@ -3,9 +3,8 @@ from typing import Any
 from fastapi import APIRouter, Depends, HTTPException
 
 from application.db_app import schemas
-from application.services.menu_service import MenuService
-
 from application.services.all_data_service import AllDataService
+from application.services.menu_service import MenuService
 
 router = APIRouter(prefix='/api/v1')
 
