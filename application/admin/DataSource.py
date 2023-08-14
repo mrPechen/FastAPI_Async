@@ -1,5 +1,3 @@
-from typing import List
-
 import pandas as pd
 
 from application.db_app.schemas import MenuParseSchema, SubmenuParseSchema, DishParseSchema
@@ -8,12 +6,12 @@ from application.db_app.schemas import MenuParseSchema, SubmenuParseSchema, Dish
 class XlsxDataSource:
     def __init__(self, filename: str):
         self.filename = filename
-        self.menus_file_data = []
-        self.submenus_file_data = []
-        self.dishes_file_data = []
+        self.menus_file_data: list = []
+        self.submenus_file_data: list = []
+        self.dishes_file_data: list = []
         self.parse()
 
-    def parse(self) -> List:
+    def parse(self) -> list:
         df = None
         if self.filename.endswith('.xlsx'):
             df = pd.DataFrame(data=pd.read_excel(self.filename, header=None))
@@ -21,7 +19,7 @@ class XlsxDataSource:
             df = pd.DataFrame(data=pd.read_csv(self.filename, on_bad_lines='skip', header=None))
         current_menu_id = None
         current_submenu_id = None
-        result = []
+        result: list = []
         for index, row in df.iterrows():
 
             if pd.notna(row[0]):
