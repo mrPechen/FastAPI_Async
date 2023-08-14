@@ -14,7 +14,11 @@ class XlsxDataSource:
         self.parse()
 
     def parse(self) -> List:
-        df = pd.DataFrame(data=pd.read_excel(self.filename, header=None))
+        df = None
+        if self.filename.endswith('.xlsx'):
+            df = pd.DataFrame(data=pd.read_excel(self.filename, header=None))
+        else:
+            df = pd.DataFrame(data=pd.read_csv(self.filename, on_bad_lines='skip', header=None))
         current_menu_id = None
         current_submenu_id = None
         result = []
