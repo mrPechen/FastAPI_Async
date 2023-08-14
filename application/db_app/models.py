@@ -1,7 +1,9 @@
+from typing import Any
+
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship, declarative_base
 
-Base = declarative_base()
+Base: Any = declarative_base()
 
 
 class Menu(Base):
