@@ -2,8 +2,8 @@
 Task from the YLab company. FastAPI + SQLalchemy + PostgreSQL + Pytest + Docker + Redis + Celery + RabbitMQ + Excel.
 
 Реализованные задачи под *:
-    -Вывод количества подменю и блюд для Меню через один (сложный) ORM запрос. Где посмотреть: "application/repositories/menu_repository/функция get_meny()"
-    -Тестовый сценарий «Проверка кол-ва блюд и подменю в меню» из Postman с помощью pytest. Где посмотреть: "application/tests/count_submenus_and_dishes_test.py"
+-Вывод количества подменю и блюд для Меню через один (сложный) ORM запрос. Где посмотреть: "application/repositories/menu_repository/функция get_meny()"
+-Тестовый сценарий «Проверка кол-ва блюд и подменю в меню» из Postman с помощью pytest. Где посмотреть: "application/tests/count_submenus_and_dishes_test.py"
 
 Для хранения переменных во время запуска Pytest использовал встроенное кэширование.
 Тест подсчета подменю и блюд реализован в файле "application/tests/count_submenus_and_dishes_test.py". Он запускается вместе со всеми тестами.
