@@ -1,12 +1,14 @@
 # YLab_async_project
-Task from the YLab company. FastAPI + SQLalchemy + PostgreSQL + Pytest + Docker + Redis + Celery + RabbitMQ + Excel.
+Task from the YLab company. FastAPI + SQLalchemy + PostgreSQL + Pytest + Docker + Redis + Celery + RabbitMQ + Excel + Google sheets.
 
 Реализованные задачи под *:  
--Вывод количества подменю и блюд для Меню через один (сложный) ORM запрос. Где посмотреть: "application/repositories/menu_repository/функция get_meny()".  
 
--Тестовый сценарий «Проверка кол-ва блюд и подменю в меню» из Postman с помощью pytest. Где посмотреть: "application/tests/count_submenus_and_dishes_test.py".
+--Вывод количества подменю и блюд для Меню через один (сложный) ORM запрос. Где посмотреть: "application/repositories/menu_repository/функция get_meny()".  
 
--Обновление меню из google sheets раз в 15 сек. Где посмотреть: "application/admin/DataSource/21 строчка" и "application/admin/tasks/11 и 12 строчка".
+--Тестовый сценарий «Проверка кол-ва блюд и подменю в меню» из Postman с помощью pytest. Где посмотреть: "application/tests/count_submenus_and_dishes_test.py".
+
+--Обновление меню из google sheets раз в 15 сек. Где посмотреть: "application/admin/DataSource/21 строчка" и "application/admin/tasks/11 и 12 строчка".
+
 
 Для хранения переменных во время запуска Pytest использовал встроенное кэширование.
 Тест подсчета подменю и блюд реализован в файле "application/tests/count_submenus_and_dishes_test.py". Он запускается вместе со всеми тестами.
@@ -15,12 +17,13 @@ Task from the YLab company. FastAPI + SQLalchemy + PostgreSQL + Pytest + Docker 
 
 Проверка кода через линтеры в файле ".pre-commit-config.yaml". В корне проекта запустить команды "pre-commit install", затем "pre-commit run --all-files".
 
+
 Для запуска из докера:
 
   1. Клонировать проект.
   2. Убрать расширение txt у файла ".env.txt".
   3. Если необходимо изменить параметры для Postgres, Redis, RabbitMQ.
-
+     
     Запуск проекта и базы данных без Celery, чтобы не было конфликтов между Postman и Celery:
 
     1. Запустить команду "docker compose -f docker-compose-without-celery.yaml up --build" из корня проекта.
@@ -45,5 +48,6 @@ Task from the YLab company. FastAPI + SQLalchemy + PostgreSQL + Pytest + Docker 
     5. Для работы через google_sheets остановить контейнеры, перейти в "application/admin/tasks/функция 'run'", в переменной "file" изменить аргумент 'application/admin/Menu.xlsx' класса XlsxDataSource() на переменную "url", в которой уже прописан адрес google документа.
     6. Запустить команду "docker compose -f docker-compose.yaml up --build" из корня проекта.
     7. Для изменения/добавления/удаления данных перейти по ссылке "https://docs.google.com/spreadsheets/d/1XPapODkrVhDUzbiR9vSmH7_-cZvjn3HcclbMGlEkbp4/edit#gid=0". Примечания такие же, как и в пункте №4.
+    '''
 
 
