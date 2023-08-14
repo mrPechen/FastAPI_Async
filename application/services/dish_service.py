@@ -2,6 +2,7 @@ from typing import Any
 
 from fastapi import Depends
 from fastapi.background import BackgroundTasks
+
 from application.cache.cache import RedisRepository
 from application.db_app import schemas
 from application.repositories.dish_repository import DishRepository
