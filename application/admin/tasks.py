@@ -1,10 +1,11 @@
 from typing import Any
 
-from application.admin.DataSource import XlsxDataSource
-from application.admin.AdminService import EntityMerger
-from application.db_app.models import Menu, Submenu, Dish
-from application.celery.task_for_file import task
 from asgiref.sync import async_to_sync
+
+from application.admin.AdminService import EntityMerger
+from application.admin.DataSource import XlsxDataSource
+from application.celery.task_for_file import task
+from application.db_app.models import Dish, Menu, Submenu
 
 
 async def run() -> Any:
