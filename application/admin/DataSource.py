@@ -42,7 +42,7 @@ class XlsxDataSource:
                     raise Exception("Unexpected Dish without Submenu. Row index:", index)
                 self.dishes_file_data.append(
                     DishParseSchema(id=int(row[2]), title=row[3], description=row[4], price=str(row[5]),
-                                    submenu_id=int(current_submenu_id), menu_id=int(current_menu_id)))
+                                    submenu_id=int(current_submenu_id), menu_id=int(current_menu_id))) # type: ignore[arg-type]
 
             else:
                 print('Unexpected line', row)
