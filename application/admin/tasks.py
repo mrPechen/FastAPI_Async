@@ -9,7 +9,7 @@ from application.db_app.models import Dish, Menu, Submenu
 
 
 async def run() -> Any:
-    url = 'https://docs.google.com/spreadsheets/d/1XPapODkrVhDUzbiR9vSmH7_-cZvjn3HcclbMGlEkbp4/export?format=csv'
+    # url = 'https://docs.google.com/spreadsheets/d/1XPapODkrVhDUzbiR9vSmH7_-cZvjn3HcclbMGlEkbp4/export?format=csv'
     file = XlsxDataSource('application/admin/Menu.xlsx')
     menu = file.menus_file_data
     submenu = file.submenus_file_data
