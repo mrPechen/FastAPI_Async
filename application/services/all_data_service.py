@@ -19,7 +19,7 @@ class AllDataService:
     async def set_cache(self, value: Any) -> Any:
         data = jsonable_encoder(value)
         serialized_data = json.dumps(data)
-        return await self.redis.redis.set(name='all_data', value=serialized_data, ex=120)
+        return await self.redis.redis.set(name='all_data', value=serialized_data, ex=15)
 
     async def get_cache(self) -> Any:
         return await self.redis.get_cache(name='all_data')
