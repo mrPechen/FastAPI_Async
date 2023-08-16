@@ -1,6 +1,8 @@
 # YLab_async_project
 Task from the YLab company. FastAPI + SQLalchemy + PostgreSQL + Pytest + Docker + Redis + Celery + RabbitMQ + Excel + Google sheets.
 
+Решил сделать для асинхрона отдельный репозиторий. Вот ссылка на изначальный: https://github.com/mrPechen/YLab_project_1
+
 Реализованные задачи под *:  
 
 --Вывод количества подменю и блюд для Меню через один (сложный) ORM запрос. Где посмотреть: "application/repositories/menu_repository/функция get_meny()".  
