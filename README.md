@@ -9,7 +9,7 @@ Task from the YLab company. FastAPI + SQLalchemy + PostgreSQL + Pytest + Docker 
 
 --Тестовый сценарий «Проверка кол-ва блюд и подменю в меню» из Postman с помощью pytest. Где посмотреть: "application/tests/count_submenus_and_dishes_test.py".
 
---Обновление меню из google sheets раз в 15 сек. Где посмотреть: "application/admin/DataSource/21 строчка" и "application/admin/tasks/11 и 12 строчка".
+--Обновление меню из google sheets раз в 15 сек. Где посмотреть: "application/admin/DataSource/23 строчка" и "application/admin/tasks/12 и 13 строчка".
 
 
 Для хранения переменных во время запуска Pytest использовал встроенное кэширование.
