@@ -51,7 +51,7 @@ class MenuService:
         menus = await self.menu_repository.get_menus()
         get_cache = await self.get_cache()
         if get_cache:
-            print("cache")
+            print('cache')
             return get_cache
         self.background_task.add_task(await self.set_cache(value=menus, if_list=True))
         return menus
