@@ -1,3 +1,5 @@
+from typing import Any
+
 import pytest
 from httpx import AsyncClient
 
@@ -10,25 +12,25 @@ pytestmark = pytest.mark.asyncio
 
 
 @pytest.fixture(autouse=True)
-def init_cache(request):
+def init_cache(request: Any) -> Any:
     request.config.cache.get('menu', None)
     request.config.cache.get('submenu', None)
 
 
 @pytest.mark.order(7)
-async def test_create_menu(request):
+async def test_create_menu(request: Any) -> Any:
     await menu_test.test_create_menu(request)
 
 
 @pytest.mark.order(8)
-async def test_create_submenu(request):
+async def test_create_submenu(request: Any) -> Any:
     menu_id = request.config.cache.get('menu', None)['id']
     print('!!!!!!!!!!', menu_id)
     body = {
         'title': 'title submenu 15',
         'description': 'description submenu 15'
     }
-    response = await client.post(url=f"/api/v1/menus/{menu_id}/submenus", json=body)
+    response = await client.post(url=f'/api/v1/menus/{menu_id}/submenus', json=body)
     json_response = response.json()
     print(response.request)
     print(response)
@@ -42,9 +44,9 @@ async def test_create_submenu(request):
 
 
 @pytest.mark.order(9)
-async def test_get_submenus(request):
+async def test_get_submenus(request: Any) -> Any:
     menu_id = request.config.cache.get('menu', None)['id']
-    response = await client.get(url=f"/api/v1/menus/{menu_id}/submenus")
+    response = await client.get(url=f'/api/v1/menus/{menu_id}/submenus')
     response_json = response.json()
     print(response.request)
     print(response)
@@ -58,7 +60,7 @@ async def test_get_submenus(request):
 
 
 @pytest.mark.order(10)
-async def test_get_submenu(request, test_count=False, dish_count=None):
+async def test_get_submenu(request: Any, test_count: bool = False, dish_count: Any = None) -> Any:
     if test_count is False:
         menu_id = request.config.cache.get('menu', None)['id']
         cache_submenu = request.config.cache.get('submenu', None)
@@ -66,7 +68,7 @@ async def test_get_submenu(request, test_count=False, dish_count=None):
         submenu_id = cache_submenu['id']
         submenu_title = cache_submenu['title']
         submenu_description = cache_submenu['description']
-        response = await client.get(url=f"/api/v1/menus/{menu_id}/submenus/{submenu_id}")
+        response = await client.get(url=f'/api/v1/menus/{menu_id}/submenus/{submenu_id}')
         print(response.request)
         print(response)
         print(response.json())
@@ -83,7 +85,7 @@ async def test_get_submenu(request, test_count=False, dish_count=None):
         cache_submenu = request.config.cache.get('submenu', None)
         print('!!!!!!!!!!', cache_submenu)
         submenu_id = cache_submenu['id']
-        response = await client.get(url=f"/api/v1/menus/{menu_id}/submenus/{submenu_id}")
+        response = await client.get(url=f'/api/v1/menus/{menu_id}/submenus/{submenu_id}')
         print(response.request)
         print(response)
         print(response.json())
@@ -93,7 +95,7 @@ async def test_get_submenu(request, test_count=False, dish_count=None):
 
 
 @pytest.mark.order(11)
-async def test_update_submenu(request):
+async def test_update_submenu(request: Any) -> Any:
     body = {
         'title': 'updated title submenu',
         'description': 'updated description submenu'
@@ -102,7 +104,7 @@ async def test_update_submenu(request):
     cache_submenu = request.config.cache.get('submenu', None)
     print('!!!!!!!!!!', cache_submenu)
     submenu_id = cache_submenu['id']
-    response = await client.patch(url=f"/api/v1/menus/{menu_id}/submenus/{submenu_id}", json=body)
+    response = await client.patch(url=f'/api/v1/menus/{menu_id}/submenus/{submenu_id}', json=body)
     print(response.request)
     print(response)
     print(response.json())
@@ -117,22 +119,22 @@ async def test_update_submenu(request):
 
 
 @pytest.mark.order(12)
-async def test_delete_submenu(request):
+async def test_delete_submenu(request: Any) -> Any:
     menu_id = request.config.cache.get('menu', None)['id']
     cache_submenu = request.config.cache.get('submenu', None)
     submenu_id = cache_submenu['id']
-    response = await client.delete(url=f"/api/v1/menus/{menu_id}/submenus/{submenu_id}")
+    response = await client.delete(url=f'/api/v1/menus/{menu_id}/submenus/{submenu_id}')
     print(response.request)
     print(response)
     assert response.status_code == 200
 
 
 @pytest.mark.order(13)
-async def test_deleted_submenu(request):
+async def test_deleted_submenu(request: Any) -> Any:
     await test_get_submenus(request)
     await test_get_submenu(request)
 
 
 @pytest.mark.order(14)
-async def test_delete_menu(request):
+async def test_delete_menu(request: Any) -> Any:
     await menu_test.test_delete_menu(request)
