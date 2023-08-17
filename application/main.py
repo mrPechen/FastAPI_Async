@@ -1,3 +1,5 @@
+from typing import Any
+
 from fastapi import FastAPI
 
 from application.db_app import models
@@ -8,7 +10,7 @@ app = FastAPI()
 
 
 @app.on_event('startup')
-async def init_models():
+async def init_models() -> Any:
     async with engine.begin() as conn:
         await conn.run_sync(models.Base.metadata.create_all)
 
