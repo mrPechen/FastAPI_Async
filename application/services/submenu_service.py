@@ -67,6 +67,7 @@ class SubmenuService:
         self.background_task.add_task(await self.delete_cache())
         self.background_task.add_task(await self.delete_cache(submenu_id=submenu_id))
         self.background_task.add_task(await self.menu_service.delete_cache(menu_id=menu_id))
+        self.background_task.add_task(await self.menu_service.update_menu_cache())
         return delete
 
     async def update_submenu(self, submenu_schemas: schemas.SubmenuUpdate, menu_id: int, submenu_id: int) -> Any:
@@ -74,6 +75,7 @@ class SubmenuService:
                                                               menu_id=menu_id, submenu_id=submenu_id)
         self.background_task.add_task(await self.update_submenu_cache(menu_id=menu_id))
         self.background_task.add_task(await self.update_submenu_cache(menu_id=menu_id, submenu_id=submenu_id))
+        self.background_task.add_task(await self.menu_service.update_menu_cache())
         return update
 
     async def create_submenu(self, submenu_schemas: schemas.SubmenuCreate, menu_id: int) -> Any:
