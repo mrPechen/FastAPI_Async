@@ -1,12 +1,12 @@
 from typing import Any, Sequence
 
 from fastapi import Depends
-from sqlalchemy import select, Row, RowMapping
+from sqlalchemy import Row, RowMapping, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Session, joinedload
 
 from application.db_app.database import connect_db
-from application.db_app.models import Menu, Submenu, Dish
+from application.db_app.models import Dish, Menu, Submenu
 
 
 class AllDataRepository:
