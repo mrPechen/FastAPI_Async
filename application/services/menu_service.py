@@ -5,6 +5,7 @@ from fastapi import BackgroundTasks, Depends
 from application.cache.cache import RedisRepository
 from application.db_app import schemas
 from application.repositories.menu_repository import MenuRepository
+from application.services.all_data_service import AllDataService
 
 
 class MenuService:
@@ -13,6 +14,7 @@ class MenuService:
         self.redis = RedisRepository()
         self.cache_name = 'menu_cache'
         self.background_task = BackgroundTasks()
+        self.all_cache = AllDataService(self.menu_repository.all_repository)
 
     async def set_cache(self, value: Any, menu_id: int | None = None, if_list: bool = False) -> Any:
         name = self.cache_name
@@ -30,6 +32,7 @@ class MenuService:
 
     async def delete_cache(self, menu_id: int | None = None) -> Any:
         name = self.cache_name
+        await self.all_cache.set_cache()
         if menu_id:
             return await self.redis.delete_cache(name=f'{name}_{menu_id}')
         await self.redis.delete_cache(name='submenu_cache')
@@ -37,6 +40,7 @@ class MenuService:
         return await self.redis.delete_cache(name=f'{name}')
 
     async def update_menu_cache(self, menu_id: int | None = None) -> Any:
+        await self.all_cache.set_cache()
         if menu_id:
             menu = await self.menu_repository.get_menu(menu_id=menu_id)
             return await self.set_cache(value=menu, menu_id=menu_id)
