@@ -70,6 +70,7 @@ class DishService:
         self.background_task.add_task(await self.delete_cache(dish_id=dish_id))
         self.background_task.add_task(await self.submenu_service.delete_cache(submenu_id=submenu_id))
         self.background_task.add_task(await self.menu_service.delete_cache(menu_id=menu_id))
+        self.background_task.add_task(await self.menu_service.update_menu_cache())
         return delete
 
     async def update_dish(self, dish_schemas: schemas.DishUpdate, menu_id: int,
@@ -79,6 +80,7 @@ class DishService:
         self.background_task.add_task(await self.update_dish_cache(menu_id=menu_id, submenu_id=submenu_id))
         self.background_task.add_task(
             await self.update_dish_cache(menu_id=menu_id, submenu_id=submenu_id, dish_id=dish_id))
+        self.background_task.add_task(await self.menu_service.update_menu_cache())
         return update
 
     async def create_dish(self, dish_schemas: schemas.DishCreate, menu_id: int, submenu_id: int) -> Any:
