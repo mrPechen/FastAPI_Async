@@ -32,14 +32,28 @@ services:
     env_file:
       - ./.env
     depends_on:
-      - db
-      - redis
+      - fastapi
     networks:
       - ylab_project_pytest
     command: sh -c "pytest -v"
 
 
+  fastapi:
+    container_name: peche_fastapi_pytest
+    build:
+      context: .
+    command: uvicorn application.main:app --host 0.0.0.0 --reload
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+    networks:
+      - ylab_project_pytest
+    restart: always
+    depends_on:
+      - db
+      - redis
+
 networks:
   ylab_project_pytest:
     driver: bridge
-
