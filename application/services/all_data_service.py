@@ -16,7 +16,8 @@ class AllDataService:
         self.redis = RedisRepository()
         self.background_task = BackgroundTasks()
 
-    async def set_cache(self, value: Any) -> Any:
+    async def set_cache(self) -> Any:
+        value = await self.repository.get_all()
         data = jsonable_encoder(value)
         serialized_data = json.dumps(data)
         return await self.redis.redis.set(name='all_data', value=serialized_data, ex=15)
@@ -29,5 +30,5 @@ class AllDataService:
         cache = await self.get_cache()
         if cache:
             return cache
-        self.background_task.add_task(await self.set_cache(value=data))
+        self.background_task.add_task(await self.set_cache())
         return data
