@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 from application.db_app import schemas
 from application.db_app.database import connect_db
 from application.db_app.models import Dish, Menu, Submenu
+from application.repositories.all_data_repository import AllDataRepository
 
 
 class MenuRepository:
@@ -18,6 +19,7 @@ class MenuRepository:
         self.menu = Menu
         self.submenu = Submenu
         self.dish = Dish
+        self.all_repository = AllDataRepository(session=session)
 
     async def get_menus(self) -> Sequence[Row[tuple]]:
         result = await self.db.execute(
