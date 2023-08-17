@@ -32,17 +32,17 @@ class XlsxDataSource:
 
             elif pd.notna(row[1]):
                 if current_menu_id is None:
-                    raise Exception("Unexpected Submenu without Menu. Row index:", index)
+                    raise Exception('Unexpected Submenu without Menu. Row index:', index)
                 current_submenu_id = row[1]
                 self.submenus_file_data.append(
                     SubmenuParseSchema(id=int(row[1]), title=row[2], description=row[3], menu_id=int(current_menu_id)))
 
             elif pd.notna(row[2]):
                 if current_submenu_id is None:
-                    raise Exception("Unexpected Dish without Submenu. Row index:", index)
+                    raise Exception('Unexpected Dish without Submenu. Row index:', index)
                 self.dishes_file_data.append(
                     DishParseSchema(id=int(row[2]), title=row[3], description=row[4], price=str(row[5]),
-                                    submenu_id=int(current_submenu_id), menu_id=int(current_menu_id))) # type: ignore[arg-type]
+                                    submenu_id=int(current_submenu_id), menu_id=int(current_menu_id)))  # type: ignore[arg-type]
 
             else:
                 print('Unexpected line', row)
