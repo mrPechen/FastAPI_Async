@@ -1,3 +1,5 @@
+from typing import Any
+
 import pytest
 from httpx import AsyncClient
 
@@ -8,12 +10,12 @@ pytestmark = pytest.mark.asyncio
 
 
 @pytest.fixture(autouse=True)
-def init_cache(request):
+def init_cache(request: Any) -> Any:
     request.config.cache.get('menu', None)
 
 
 @pytest.mark.order(1)
-async def test_create_menu(request):
+async def test_create_menu(request: Any) -> Any:
     body = {
         'title': 'title',
         'description': 'description'
@@ -32,7 +34,7 @@ async def test_create_menu(request):
 
 
 @pytest.mark.order(2)
-async def test_get_menus():
+async def test_get_menus() -> Any:
     response = await client.get(url='/api/v1/menus')
     response_json = response.json()
     print(response.request)
@@ -47,7 +49,8 @@ async def test_get_menus():
 
 
 @pytest.mark.order(3)
-async def test_get_menu(request, test_count=False, submenu_count=None, dish_count=None):
+async def test_get_menu(request: Any, test_count: bool = False, submenu_count: Any = None,
+                        dish_count: Any = None) -> Any:
     if test_count is False:
         cache = request.config.cache.get('menu', None)
         menu_id = cache['id']
@@ -79,13 +82,12 @@ async def test_get_menu(request, test_count=False, submenu_count=None, dish_coun
 
 
 @pytest.mark.order(4)
-async def test_update_menu(request):
+async def test_update_menu(request: Any) -> Any:
     body = {
         'title': 'updated title',
         'description': 'updated description'
     }
     cache = request.config.cache.get('menu', None)
-    print('!!!!!!!!!!', cache)
     menu_id = cache['id']
     response = await client.patch(url=f'/api/v1/menus/{menu_id}', json=body)
     print(response.request)
@@ -102,7 +104,7 @@ async def test_update_menu(request):
 
 
 @pytest.mark.order(5)
-async def test_delete_menu(request):
+async def test_delete_menu(request: Any) -> Any:
     cache = request.config.cache.get('menu', None)
     menu_id = cache['id']
     response = await client.delete(url=f'/api/v1/menus/{menu_id}')
@@ -112,6 +114,6 @@ async def test_delete_menu(request):
 
 
 @pytest.mark.order(6)
-async def test_deleted_menu(request):
+async def test_deleted_menu(request: Any) -> Any:
     await test_get_menus()
     await test_get_menu(request)
