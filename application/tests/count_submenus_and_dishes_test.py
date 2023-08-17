@@ -1,3 +1,5 @@
+from typing import Any
+
 import pytest
 
 from . import dish_test, menu_test, submenu_test
@@ -6,14 +8,14 @@ pytestmark = pytest.mark.asyncio
 
 
 @pytest.fixture(autouse=True)
-def init_cache(request):
+def init_cache(request: Any) -> Any:
     request.config.cache.get('menu', None)
     request.config.cache.get('submenu', None)
     request.config.cache.get('dish', None)
 
 
 @pytest.mark.order(22)
-async def test_create_response(request):
+async def test_create_response(request: Any) -> Any:
     await menu_test.test_create_menu(request)
     await submenu_test.test_create_submenu(request)
     body = {
