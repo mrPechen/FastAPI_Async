@@ -11,3 +11,5 @@ asyncpg
 pandas
 asgiref
 openpyxl
+pytest-asyncio
+anyio
