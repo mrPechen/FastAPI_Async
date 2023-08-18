@@ -32,7 +32,8 @@ services:
     env_file:
       - ./.env
     depends_on:
-      - fastapi
+      fastapi:
+        condition: service_started
     networks:
       - ylab_project_pytest
     command: sh -c "pytest -v"
