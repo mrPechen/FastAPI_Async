@@ -1,23 +1,17 @@
-# YLab_async_project
-Task from the YLab company. FastAPI + SQLalchemy + PostgreSQL + Pytest + Docker + Redis + Celery + RabbitMQ + Excel + Google sheets.
+# Async version Fastapi.
+API для меню ресторана.
 
-Решил сделать для асинхрона отдельный репозиторий. Вот ссылка на изначальный: https://github.com/mrPechen/YLab_project_1
+Стэк: FastAPI + SQLalchemy + PostgreSQL + Pytest + Docker + Redis + Celery + RabbitMQ + Excel + Google sheets.
 
-Реализованные задачи под *:  
+Реализованы CRUD операции путем редактирования Excel или Google sheets файла.
 
---Вывод количества подменю и блюд для Меню через один (сложный) ORM запрос. Где посмотреть: "application/repositories/menu_repository/функция get_meny()".  
-
---Тестовый сценарий «Проверка кол-ва блюд и подменю в меню» из Postman с помощью pytest. Где посмотреть: "application/tests/count_submenus_and_dishes_test.py".
-
---Обновление меню из google sheets раз в 15 сек. Где посмотреть: "application/admin/DataSource/23 строчка" и "application/admin/tasks/12 и 13 строчка".
-
+Решил сделать для асинхрона отдельный репозиторий. Вот ссылка на изначальный: https://github.com/mrPechen/FastAPI_sync
 
 Для хранения переменных во время запуска Pytest использовал встроенное кэширование.
-Тест подсчета подменю и блюд реализован в файле "application/tests/count_submenus_and_dishes_test.py". Он запускается вместе со всеми тестами.
 
 Для хранения кеша API используется redis.
 
-Проверка кода через линтеры в файле ".pre-commit-config.yaml". Перед запуском поставить точку в начале имени файла. В корне проекта запустить команды "pre-commit install", затем "pre-commit run --all-files".
+Проверка кода через линтеры в файле ".pre-commit-config.yaml".
 
 
 Для запуска из докера:
